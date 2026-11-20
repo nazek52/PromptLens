@@ -22,9 +22,9 @@ The completeness score is a checklist of provided choices, **not** a probability
 
 ## Install in Chrome
 
-1. Download the extension ZIP and extract it. If using source, run `npm run build` first.
+1. [Download the repository ZIP](https://github.com/nazek52/PromptLens/archive/refs/heads/main.zip) and extract it. The source folder is already a loadable extension; no build or dependency installation is required.
 2. Open `chrome://extensions` and enable **Developer mode**.
-3. Choose **Load unpacked** and select the extracted folder containing `manifest.json` (or `dist/` after building).
+3. Choose **Load unpacked** and select the extracted `PromptLens-main` folder containing `manifest.json` (or `dist/` if you optionally ran `npm run build`).
 4. Open [ChatGPT](https://chatgpt.com), pin PromptLens, and click its toolbar icon. The studio opens in a side panel.
 5. Choose **Аниме-персонаж**, replace the sample details with your own, then click **Собрать промпт**.
 6. Review the questions and output. Click **Вставить в ChatGPT** or **Скопировать**. Send only after checking the text.
