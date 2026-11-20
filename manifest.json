@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "PromptLens — Image Prompt Studio",
+  "version": "0.1.0",
+  "description": "Turn your image idea into a clear brief. Plan precise edits before generating in ChatGPT. Works offline, no API key.",
+  "minimum_chrome_version": "116",
+  "permissions": ["activeTab", "scripting", "storage", "sidePanel"],
+  "action": { "default_title": "Open PromptLens" },
+  "background": { "service_worker": "src/background.js", "type": "module" },
+  "side_panel": { "default_path": "panel.html" },
+  "icons": { "16": "assets/icon16.png", "48": "assets/icon48.png", "128": "assets/icon128.png" },
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'none'; connect-src 'none'; img-src 'self' data:; style-src 'self'" }
+}

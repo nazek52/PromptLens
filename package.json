@@ -1,0 +1,15 @@
+{
+  "name": "promptlens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline visual brief builder and precise image-edit assistant for ChatGPT",
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check.mjs",
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "engines": { "node": ">=22" },
+  "license": "MIT"
+}

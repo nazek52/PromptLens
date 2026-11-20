@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="PromptLens — соберите понятный промпт для изображения до первой генерации.">
+  <title>PromptLens — от замысла к изображению</title>
+  <link rel="stylesheet" href="src/panel.css">
+  <script type="module" src="src/panel.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="masthead">
+      <a class="brand" href="panel.html" aria-label="PromptLens — главная"><span class="brand-mark" aria-hidden="true">p</span>promptlens<span class="brand-dot">.</span></a>
+      <span class="privacy-badge"><span aria-hidden="true">●</span> Всё на устройстве</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy"><p class="eyebrow">ВАШ ЗАМЫСЕЛ, ТОЧНЕЕ</p><h1 id="hero-title">Сначала замысел.<br><span>Потом генерация.</span></h1><p class="hero-description">Превратите «примерно вот так» в понятное описание. Уточните детали сейчас, чтобы меньше исправлять потом.</p></div>
+        <div class="hero-art" aria-hidden="true"><div class="art-orbit"></div><div class="art-card art-card-back"></div><div class="art-card art-card-front"><span class="art-sun"></span><span class="art-mountain"></span><span class="art-mountain second"></span><span class="art-star">✦</span></div><span class="art-caption">a little more intentional.</span></div>
+      </section>
+
+      <div class="workspace">
+        <section class="editor-column" aria-label="Настройка изображения">
+          <div class="mode-tabs" role="tablist" aria-label="Режим промпта"><button id="create-tab" type="button" role="tab" aria-selected="true" aria-controls="create-panel" tabindex="0">Новое изображение</button><button id="edit-tab" type="button" role="tab" aria-selected="false" aria-controls="edit-panel" tabindex="-1">Точная правка</button></div>
+
+          <div id="create-panel" role="tabpanel" aria-labelledby="create-tab">
+            <section class="preset-section" aria-labelledby="preset-title"><div class="section-heading"><h2 id="preset-title">С чего начнём?</h2><button id="empty-brief" class="text-button" type="button">Чистый лист</button></div><p class="helper">Выберите пример и измените детали под себя.</p><div id="presets" class="preset-grid"></div></section>
+            <form id="brief-form" novalidate>
+              <div class="form-heading"><span class="step-marker">01</span><div><h2>Опишите главное</h2><p class="helper">Пишите на удобном языке. Мы сохраним ваши слова.</p></div></div>
+              <label class="field"><span>Что вы представляете? <span class="required-note">начните здесь</span></span><textarea id="idea" name="idea" rows="3" maxlength="2400" placeholder="Например: персонаж аниме для аватарки — спокойная девушка с короткими серебристыми волосами"></textarea></label>
+              <label class="field"><span>Главный объект или персонаж</span><input id="subject" name="subject" maxlength="2400" placeholder="Кто в кадре? Внешность, одежда, важные особенности"></label>
+              <div class="field-row"><label class="field"><span>Визуальный стиль</span><input id="style" name="style" maxlength="2400" list="style-options" placeholder="Аниме, акварель, фото…"></label><label class="field"><span>Формат кадра</span><select id="aspectRatio" name="aspectRatio"><option value="">Пока не важно</option value="1:1">1:1 · квадрат</option><option value="2:3">2:3 · портрет</option><option value="3:2">3:2 · горизонтальный</option><option value="9:16">9:16 · вертикальный</option><option value="16:9">16:9 · широкий</option><option value="4:5">4:5 · публикация</option></select></label></div>
+              <label class="field"><span>Для чего изображение?</span><input id="purpose" name="purpose" maxlength="2400" placeholder="Аватарка, обложка, карточка товара…"></label>
+              <datalist id="style-options"><option value="Аниме, аккуратный лайнарт, мягкая cel shading"><option value="Естественная портретная фотография"><option value="Акварельная иллюстрация"><option value="Минималистичная векторная графика"><option value="Кинематографичная 3D-иллюстрация"></datalist>
+
+              <details class="optional-details"><summary><span><span class="step-marker small">02</span> Детали, которые меняют результат</span><span class="summary-chevron" aria-hidden="true">+</span></summary><div class="details-body">
+                <label class="field"><span>Композиция и ракурс</span><input id="composition" name="composition" maxlength="2400" placeholder="Крупный план, по пояс, объект справа…"></label>
+                <label class="field"><span>Фон и окружение</span><input id="background" name="background" maxlength="2400" placeholder="Простой светлый фон, ночной город, прозрачный фон…"></label>
+                <div class="field-row"><label class="field"><span>Свет</span><input id="lighting" name="lighting" maxlength="2400" placeholder="Мягкий рассеянный свет"></label><label class="field"><span>Цветовая палитра</span><input id="palette" name="palette" maxlength="2400" placeholder="Сиреневый и кремовый"></label></div>
+                <label class="field"><span>Обязательные детали</span><textarea id="details" name="details" rows="2" maxlength="2400" placeholder="То, что должно быть точно: серьги-звёзды, зелёные глаза…"></textarea></label>
+                <label class="field"><span>Текст внутри изображения <span class="optional-note">если нужен</span></span><input id="text" name="text" maxlength="2400" placeholder="Точная надпись, включая регистр и знаки"></label>
+                <label class="field"><span>Чего избегать</span><textarea id="avoid" name="avoid" rows="2" maxlength="2400" placeholder="Лишние персонажи, надписи, перегруженный фон…"></textarea></label>
+              </div></details>
+              <button class="primary-button build-button" type="submit"><span aria-hidden="true">✦</span> Собрать промпт <span class="button-arrow" aria-hidden="true">↗</span></button>
+            </form>
+          </div>
+
+          <div id="edit-panel" role="tabpanel" aria-labelledby="edit-tab" hidden>
+            <div class="edit-intro"><span class="step-marker">01</span><h2>Одна правка. Чёткие границы.</h2><p class="helper">Откройте чат с нужным изображением или прикрепите его вручную. Опишите изменение и то, что нужно сохранить.</p></div>
+            <form id="edit-form" novalidate><label class="field"><span>Что изменить?</span><textarea id="edit-change" rows="3" maxlength="2400" required placeholder="Измени только цвет куртки на тёмно-зелёный"></textarea></label><label class="field"><span>Что обязательно сохранить?</span><textarea id="edit-preserve" rows="3" maxlength="2400" required placeholder="Лицо, причёску, позу, фон, освещение и композицию"></textarea></label><label class="field"><span>Какое изображение редактируем? <span class="optional-note">необязательно</span></span><input id="edit-reference" maxlength="2400" placeholder="Первое изображение в этом чате"></label><p class="tip">Конкретные изменения проще проверять. Если результат почти подходит, попробуйте точную правку вместо полной перегенерации.</p><button class="primary-button build-button" type="submit"><span aria-hidden="true">✦</span> Собрать правку <span class="button-arrow" aria-hidden="true">↗</span></button></form>
+          </div>
+
+          <section class="history-section" aria-labelledby="history-title"><div class="section-heading"><h2 id="history-title">Мои замыслы <span id="history-count" class="count-badge">0</span></h2><button id="clear-history" class="text-button muted" type="button">Удалить данные</button></div><div id="history-list" class="history-list"></div><div class="file-actions"><button id="export-brief" type="button" class="text-button">↓ Экспорт замысла</button><button id="import-brief" type="button" class="text-button">↑ Импорт JSON</button><input id="import-file" type="file" accept="application/json,.json" hidden></div></section>
+        </section>
+
+        <aside class="result-column" aria-label="Проверка и результат">
+          <section class="readiness-card" aria-labelledby="readiness-title"><div class="section-heading"><h2 id="readiness-title">Проверим замысел</h2><span id="readiness-value" class="score-label">0 / 100</span></div><progress id="readiness-progress" max="100" value="0" aria-label="Полнота описания"></progress><p class="score-caption">Полнота описания, а не вероятность успеха.</p><div id="analysis-content"></div><div class="readiness-footnote"><span aria-hidden="true">↳</span> Ответы добавляйте в поля слева или выше.</div></section>
+          <section class="prompt-card" aria-labelledby="prompt-title"><div class="section-heading"><h2 id="prompt-title">Ваш промпт</h2><span class="small-pill">Можно редактировать</span></div><p id="prompt-hint" class="helper">Соберите промпт, когда важные детали определены.</p><label class="sr-only" for="prompt-output">Готовый промпт, доступный для редактирования</label><textarea id="prompt-output" rows="13" spellcheck="false" placeholder="Здесь появится описание, которое можно отправить в ChatGPT."></textarea><div class="prompt-meta"><span id="prompt-length">0 символов</span><span id="prompt-state">Ждём ваш замысел</span></div><div class="result-actions"><button id="copy-prompt" class="secondary-button" type="button" disabled>Копировать</button><button id="save-prompt" class="secondary-button" type="button" disabled>Сохранить</button></div><button id="insert-prompt" class="insert-button" type="button" disabled>Вставить в ChatGPT <span aria-hidden="true">↗</span></button><p class="action-caption">Только вставка. Отправку и генерацию запускаете вы.</p><p id="action-status" class="action-status" role="status" aria-live="polite"></p></section>
+          <div class="quiet-note"><span class="note-mark" aria-hidden="true">✳</span><p>Без API-ключа и запросов к модели. PromptLens собирает промпт локально. Результат генерации не гарантирован; лимиты ChatGPT сохраняются.</p></div>
+        </aside>
+      </div>
+    </main>
+    <footer><span>promptlens · меньше догадок, больше замысла</span><span>Независимый проект · не продукт OpenAI</span></footer>
+  </div>
+</body>
+</html>

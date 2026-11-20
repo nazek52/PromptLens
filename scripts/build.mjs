@@ -1,0 +1,10 @@
+import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const dist = resolve(root, 'dist');
+const manifest = JSON.parse(await readFile(resolve(root, 'manifest.json'), 'utf8'));
+await mkdir(dist, { recursive: true });
+for (const path of ['manifest.json','panel.html','src','assets']) await cp(resolve(root, path), resolve(dist, path), { recursive: true });
+await writeFile(resolve(dist, 'VERSION.txt'), `PromptLens ${manifest.version}\nLoad this folder as an unpacked Chrome extension.\n`);
+console.log(`Built PromptLens ${manifest.version} in dist/ (no dependencies, no remote code).`);
